@@ -19,7 +19,7 @@ export const PokemonsContainer = () => {
   return (
     <div>
       <input type="text " onChange={(event) => setInput(event.currentTarget.value)}/>
-      <div className="pokemons">
+      <div className="container">
         {allPokemon.map((pokemon) => {
           return pokemon.name.includes(input) && (
            <PokemonCard key={pokemon.id} pokemon = {pokemon}/>
