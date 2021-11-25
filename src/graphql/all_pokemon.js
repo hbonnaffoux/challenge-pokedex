@@ -1,4 +1,4 @@
-import { gql } from "graphql-tag";
+import { gql } from "graphql-tag"
 
 export const ALL_POKEMON = gql`
   query allPokemon($limit: Int) {
@@ -8,4 +8,4 @@ export const ALL_POKEMON = gql`
       types {name}
     }
   }
-`;
+`
