@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useQuery } from "@apollo/react-hooks";
 import { ALL_POKEMON } from "../graphql/all_pokemon";
+import { PokemonCard } from "../components/pokemon_card";
 
 export const PokemonsContainer = () => {
   const [input, setInput] = useState('')
@@ -21,7 +22,7 @@ export const PokemonsContainer = () => {
       <div className="pokemons">
         {allPokemon.map((pokemon) => {
           return pokemon.name.includes(input) && (
-            <div key={pokemon.id}>{pokemon.name}</div>
+           <PokemonCard key={pokemon.id} pokemon = {pokemon}/>
           )
         })}
       </div>

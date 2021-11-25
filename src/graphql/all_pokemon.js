@@ -6,6 +6,7 @@ export const ALL_POKEMON = gql`
       id
       name
       types {name}
+      sprites {front_default}
     }
   }
 `
