@@ -5,6 +5,7 @@ width: 900px;
 max-width: 100%;
 padding: 0 10px;
 margin: 0 auto;
+margin-top: 40px;
 display: grid;
 grid-template-columns: repeat(3, 1fr);
 

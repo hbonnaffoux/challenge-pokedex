@@ -3,6 +3,7 @@ import { useQuery } from "@apollo/react-hooks";
 import { ALL_POKEMON } from "../graphql/all_pokemon";
 import { PokemonCard } from "../components/pokemon_card";
 import { Container } from "../components/styles/Container.styled";
+import { Header } from "../components/styles/Header.styled";
 
 export const PokemonsContainer = () => {
   const [input, setInput] = useState('')
@@ -19,7 +20,9 @@ export const PokemonsContainer = () => {
 
   return (
     <div>
-      <input type="text " onChange={(event) => setInput(event.currentTarget.value)}/>
+      <Header>Pokedex     
+      </Header>
+      <input type="text "  onChange={(event) => setInput(event.currentTarget.value)}/>
       <Container>
         {allPokemon.map((pokemon) => {
           return pokemon.name.includes(input) && (
