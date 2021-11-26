@@ -1,20 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { useQuery } from "@apollo/react-hooks";
 import { ALL_POKEMON } from "../graphql/all_pokemon";
-import { ALL_TYPES } from "../graphql/all_types";
 import { PokemonCard } from "../components/pokemon_card";
 import styled from "styled-components";
-
+import { PokemonTypes } from "../containers/pokemon_types"
 
 export const PokemonsContainer = () => {
   const [input, setInput] = useState('')
   const [filteredPokemon, setFilteredPokemon] = useState([])
-  const { data, loading, error } = useQuery(ALL_TYPES, {
 
-  });
-  const { data, loading, error } = useQuery(ALL_POKEMON, {
-    variables: {limit: 100 }
-  });
+  const { data, loading, error } = useQuery(ALL_POKEMON);
 
   const allPokemon = data?.allPokemon
 
@@ -31,23 +26,26 @@ export const PokemonsContainer = () => {
     return <div>loading ...</div>
   }
 
+  if (error) {
+    return <div>an error has occured, sorry</div>
+  }
+
   return (
     <div>
-      <TitleDiv>Pokedex     
+      <TitleDiv>
+        Pokedex
       </TitleDiv>
       <Search>
+      <PokemonTypes filterPokemon={filterPokemon} />
       <button onClick={() => setFilteredPokemon(allPokemon)}>
         all
       </button>
-      <button onClick={() => filterPokemon('Grass')}>
-        grass
-      </button>
-      <input type="text "  onChange={(event) => setInput(event.currentTarget.value)}/>
+      <input type="text "  onChange={(event) => setInput(event.currentTarget.value)} />
       </Search>
       <Container>
         {allPokemon.map((pokemon) => {
           return pokemon.name.includes(input) && filteredPokemon?.includes(pokemon) && (
-           <PokemonCard key={pokemon.id} pokemon = {pokemon}/>
+           <PokemonCard key={pokemon.id} pokemon={pokemon} />
           )
         })}
       </Container>
