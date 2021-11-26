@@ -33,3 +33,4 @@ As I wanted to respect the deadline, I didn’t have time to finish some feature
 - I would add some linting config
 - I would add some unit tests
 - I would make the Pokemon card clickable so you can access more data about a specific Pokemon
+- I would improve the responsiveness with additional media queries
