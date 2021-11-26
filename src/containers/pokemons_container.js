@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useQuery } from "@apollo/react-hooks";
 import { ALL_POKEMON } from "../graphql/all_pokemon";
 import { PokemonCard } from "../components/pokemon_card";
@@ -7,12 +7,21 @@ import styled from "styled-components";
 
 export const PokemonsContainer = () => {
   const [input, setInput] = useState('')
+  const [filteredPokemon, setFilteredPokemon] = useState([])
   const { data, loading, error } = useQuery(ALL_POKEMON, {
     variables: {limit: 100 }
   });
+
   const allPokemon = data?.allPokemon
 
-  data && console.log(data)
+  useEffect(() => {
+    setFilteredPokemon(allPokemon)
+  }, [allPokemon])
+
+  const filterPokemon = (typeName) => {
+    const results = allPokemon.filter(pokemon => pokemon.types.some(type => type.name === typeName))
+    return setFilteredPokemon(results)
+  }
 
   if (loading) {
     return <div>loading ...</div>
@@ -20,12 +29,20 @@ export const PokemonsContainer = () => {
 
   return (
     <div>
-      <Header>Pokedex     
-      </Header>
-      <Search><input type="text "  onChange={(event) => setInput(event.currentTarget.value)}/></Search>
+      <TitleDiv>Pokedex     
+      </TitleDiv>
+      <Search>
+      <button onClick={() => setFilteredPokemon(allPokemon)}>
+        all
+      </button>
+      <button onClick={() => filterPokemon('Grass')}>
+        grass
+      </button>
+      <input type="text "  onChange={(event) => setInput(event.currentTarget.value)}/>
+      </Search>
       <Container>
         {allPokemon.map((pokemon) => {
-          return pokemon.name.includes(input) && (
+          return pokemon.name.includes(input) && filteredPokemon?.includes(pokemon) && (
            <PokemonCard key={pokemon.id} pokemon = {pokemon}/>
           )
         })}
@@ -34,7 +51,7 @@ export const PokemonsContainer = () => {
   )
 };
 
-const Header = styled.div`
+const TitleDiv = styled.div`
 text-align: center;
 background-color: #B22222;
 color: white;

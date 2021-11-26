@@ -6,7 +6,7 @@ export const PokemonCard = ({pokemon}) => {
     return (
         <Card>
         <PokemonImage src={pokemon.sprites.front_default}></PokemonImage>
-        <PokemonId>{pokemon.id}</PokemonId>
+        <PokemonId>#{pokemon.id}</PokemonId>
         <PokemonName>{pokemon.name}</PokemonName>
         <PokemonType> {pokemon.types.map(type => (type.name)).join(' | ') } </PokemonType>
         </Card>
