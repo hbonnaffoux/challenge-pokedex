@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useQuery } from "@apollo/react-hooks";
 import { ALL_POKEMON } from "../graphql/all_pokemon";
+import { ALL_TYPES } from "../graphql/all_types";
 import { PokemonCard } from "../components/pokemon_card";
 import styled from "styled-components";
 
@@ -8,6 +9,9 @@ import styled from "styled-components";
 export const PokemonsContainer = () => {
   const [input, setInput] = useState('')
   const [filteredPokemon, setFilteredPokemon] = useState([])
+  const { data, loading, error } = useQuery(ALL_TYPES, {
+
+  });
   const { data, loading, error } = useQuery(ALL_POKEMON, {
     variables: {limit: 100 }
   });
