@@ -65,5 +65,5 @@ grid-template-columns: repeat(3, 1fr);
 const Search = styled.div`
 text-align: center;
 height: 80px;
-margin-top: 30px;
+margin-top: 25px;
 `
